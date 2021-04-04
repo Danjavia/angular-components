@@ -34,8 +34,7 @@ import {ActivatedRoute, Router} from '@angular/router';
       </div>
     </div>
   `,
-  styles: [
-  ]
+  styleUrls: ['./fingerprint-detector.component.scss']
 })
 export class FingerprintDetectorComponent implements OnInit {
 
