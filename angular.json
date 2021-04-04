@@ -1,7 +1,51 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "99e2d43c-881c-43f5-adee-95814819ee14"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "fingerprint-detector": {
+      "projectType": "library",
+      "root": "projects/fingerprint-detector",
+      "sourceRoot": "projects/fingerprint-detector/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/fingerprint-detector/tsconfig.lib.json",
+            "project": "projects/fingerprint-detector/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/fingerprint-detector/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fingerprint-detector/src/test.ts",
+            "tsConfig": "projects/fingerprint-detector/tsconfig.spec.json",
+            "karmaConfig": "projects/fingerprint-detector/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fingerprint-detector/tsconfig.lib.json",
+              "projects/fingerprint-detector/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "fingerprint-detector"
 }
