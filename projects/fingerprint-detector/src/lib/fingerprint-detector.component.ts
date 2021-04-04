@@ -69,9 +69,9 @@ export class FingerprintDetectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listenerEvents();
     this.checkMediaSources();
     this.getSizeCam();
+    this.listenerEvents();
   }
 
   listenerEvents = () => {
@@ -196,6 +196,7 @@ export class FingerprintDetectorComponent implements OnInit {
   }
 
   async setML(): Promise<void> {
+    console.log('ML');
 
     const hands = new window.Hands({locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
