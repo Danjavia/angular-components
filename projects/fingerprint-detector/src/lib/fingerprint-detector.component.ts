@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
       <div class="video-player" *ngIf="modelsReady && !photo" [ngClass]="screenshotTaked ? 'shutter-click' : null">
         <video
           #fingerprintVideoElement
-          [srcObject]="stream"
+          [srcObject]="currentStream"
           (loadedmetadata)="loadedMetaData()"
           (play)="playListener()"
           [style.width]="width + 'px'"
@@ -45,9 +45,8 @@ export class FingerprintDetectorComponent implements OnInit {
   private track: MediaStreamTrack;
 
   // video player
-  @Input() stream: any;
-  @Input() width: number;
-  @Input() height: number;
+  public width: number;
+  public height: number;
   @Output() takePhoto: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fingerprintVideoElement') fingerprintVideoElement: ElementRef;
   @ViewChild('canvas', {static: false}) canvas: ElementRef<HTMLCanvasElement>;
@@ -120,6 +119,8 @@ export class FingerprintDetectorComponent implements OnInit {
     const elementCam: HTMLElement = document.querySelector('.face-match');
     const { width, height } = elementCam.getBoundingClientRect();
     this.videoDimensions = { width, height };
+    this.width = width;
+    this.height = height;
     console.log(this.videoDimensions);
   }
 
