@@ -93,11 +93,15 @@ export class FingerprintDetectorComponent implements OnInit {
         const imageCapture = new window.ImageCapture(this.track);
         imageCapture.getPhotoCapabilities().then(() => {
 
-          // todo: check if camera has a torch
-          this.track.applyConstraints({
-            // @ts-ignore
-            advanced: [{ torch: this.hasTorch }]
-          });
+          try {
+            // todo: check if camera has a torch
+            this.track.applyConstraints({
+              // @ts-ignore
+              advanced: [{ torch: this.hasTorch }]
+            });
+          } catch (e) {
+            console.log(e.message);
+          }
 
           // let there be light!
           // const btn = document.querySelector('.switch');
@@ -116,6 +120,7 @@ export class FingerprintDetectorComponent implements OnInit {
     const elementCam: HTMLElement = document.querySelector('.face-match');
     const { width, height } = elementCam.getBoundingClientRect();
     this.videoDimensions = { width, height };
+    console.log(this.videoDimensions);
   }
 
   drawFace = (results, displaySize) => {
