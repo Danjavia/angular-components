@@ -1,6 +1,6 @@
 {
   "name": "fingerprint-detector",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^11.1.2",
     "@angular/core": "^11.1.2"

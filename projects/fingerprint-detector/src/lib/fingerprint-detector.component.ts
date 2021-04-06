@@ -26,7 +26,7 @@ import {ActivatedRoute, Router} from '@angular/router';
             <strong class="text-white">Espera un momento mientras tomamos la foto, esto se hará de forma automática</strong>
           </div>
         </div>
-        <div class="face-message" *ngIf="message">{{message}} <strong class="text-green-100">{{hand === 'left-hand' ? 'izquierda' : 'derecha'}}</strong> de forma correcta como se indíca en la imagen.</div>
+        <div class="face-message" *ngIf="message">{{message}} <strong class="text-green-100">{{hand === 'left-hand' ? 'izquierda' : 'derecha'}}</strong> en la pantalla hasta que aparezcan 4 círculos.</div>
       </div>
 
       <div class="photo" *ngIf="photo">
@@ -144,7 +144,7 @@ export class FingerprintDetectorComponent implements OnInit {
         });
       }
     } else {
-      this.message = `Ubica la mano`;
+      this.message = `Enfoca tu mano `;
     }
     canvasCtx.restore();
   }
