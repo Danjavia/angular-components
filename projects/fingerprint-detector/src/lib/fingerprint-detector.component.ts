@@ -16,7 +16,7 @@ import {ActivatedRoute, Router} from '@angular/router';
           [style.height]="height + 'px'"
         ></video>
         <canvas #canvas id="new-over-canvas"></canvas>
-        <img *ngIf="message" [src]="'assets/images/funnel/' + hand + '.png'" alt="placeholder" class="placeholder" />
+<!--        <img *ngIf="message" [src]="'assets/images/funnel/' + hand + '.png'" alt="placeholder" class="placeholder" />-->
         <div class="text-center text-white face-hint">
           Por favor ubica tu mano <strong class="text-green-100">{{hand === 'left-hand' ? 'izquierda' : 'derecha'}}</strong> en frente de la cámara.
         </div>
