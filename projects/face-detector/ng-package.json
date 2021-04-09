@@ -3,5 +3,6 @@
   "dest": "../../dist/face-detector",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["face-api.js", "@types/webgl2", "@tensorflow/tfjs-converter", "@tensorflow/tfjs-core"]
 }

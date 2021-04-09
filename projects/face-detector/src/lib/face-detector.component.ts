@@ -1,5 +1,5 @@
 // import { DOCUMENT } from '@angular/common';
-import {Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { FaceDetectorService } from './face-detector.service';
 import { VideoPlayerService } from './video-player.service';
@@ -25,6 +25,7 @@ export class FaceDetectorComponent implements OnInit {
   overCanvas: any;
   count = 3;
   photo: string;
+  @Input() selector: any;
 
   constructor(
     private renderer2: Renderer2,
@@ -59,7 +60,7 @@ export class FaceDetectorComponent implements OnInit {
   getSizeCam = (): void => {
     let elementCam: HTMLElement;
     // @ts-ignore
-    elementCam = document.querySelector('.face-match');
+    elementCam = document.querySelector(this.selector);
     const { width, height } = elementCam.getBoundingClientRect();
     this.videoDimensions = { width, height };
     this.width = width;
