@@ -3,5 +3,6 @@
   "dest": "../../dist/dni-detector",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["@tensorflow-models/coco-ssd", "@tensorflow/tfjs-core", "@types/webgl2"]
 }
