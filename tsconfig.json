@@ -7,6 +7,14 @@
     "sourceMap": true,
     "declaration": false,
     "paths": {
+      "dni-detector": [
+        "dist/dni-detector/dni-detector",
+        "dist/dni-detector"
+      ],
+      "face-detector": [
+        "dist/face-detector/face-detector",
+        "dist/face-detector"
+      ],
       "fingerprint-detector": [
         "dist/fingerprint-detector/fingerprint-detector",
         "dist/fingerprint-detector"

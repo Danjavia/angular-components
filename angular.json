@@ -45,6 +45,86 @@
           }
         }
       }
+    },
+    "face-detector": {
+      "projectType": "library",
+      "root": "projects/face-detector",
+      "sourceRoot": "projects/face-detector/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/face-detector/tsconfig.lib.json",
+            "project": "projects/face-detector/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/face-detector/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/face-detector/src/test.ts",
+            "tsConfig": "projects/face-detector/tsconfig.spec.json",
+            "karmaConfig": "projects/face-detector/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/face-detector/tsconfig.lib.json",
+              "projects/face-detector/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dni-detector": {
+      "projectType": "library",
+      "root": "projects/dni-detector",
+      "sourceRoot": "projects/dni-detector/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/dni-detector/tsconfig.lib.json",
+            "project": "projects/dni-detector/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dni-detector/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dni-detector/src/test.ts",
+            "tsConfig": "projects/dni-detector/tsconfig.spec.json",
+            "karmaConfig": "projects/dni-detector/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dni-detector/tsconfig.lib.json",
+              "projects/dni-detector/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "fingerprint-detector"
