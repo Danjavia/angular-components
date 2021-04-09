@@ -1,0 +1,30 @@
+<div class="dni-match">
+  <div class="video-player" *ngIf="modelsReady && !photo">
+    <video
+      *ngIf="stream"
+      #dniVideoElement
+      [srcObject]="stream"
+      (loadedmetadata)="loadedMetaData()"
+      (play)="playListener()"
+      [style.width]="width + 'px'"
+      [style.height]="height + 'px'"
+    ></video>
+    <canvas #canvas id="new-over-canvas"></canvas>
+    <img [src]="'assets/images/funnel/' + side + '.png'" alt="placeholder" class="placeholder" />
+    <div class="text-center text-white document-hint">
+      Ubica la cédula sobre una superficie plana, para mejorar el resultado.
+    </div>
+    <div class="video-player__landscape--button">
+      <div class="text-center">
+        <h3 class="text-green-100">{{count}}</h3>
+        <!--      <h3 class="text-green-100">{{type}}</h3>-->
+        <strong class="text-white">Ten en cuenta la forma indicada. Tomaremos la foto de forma automática</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo" *ngIf="photo">
+    <img [src]="photo" [width]="width" [height]="height" alt="photo" />
+  </div>
+
+</div>
