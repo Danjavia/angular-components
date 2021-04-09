@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+// import { DOCUMENT } from '@angular/common';
 import {Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { FaceDetectorService } from './face-detector.service';
@@ -32,7 +32,7 @@ export class FaceDetectorComponent implements OnInit {
     private faceApiService: FaceDetectorService,
     private videoPlayerService: VideoPlayerService,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document,
+    // @Inject(DOCUMENT) private document: Document,
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +49,7 @@ export class FaceDetectorComponent implements OnInit {
         video: true,
       }).then(stream => {
         this.currentStream = stream;
+        this.stream = this.currentStream;
       }).catch(e => console.log('The user has been denied permission'));
     } else {
       console.log('No media exists');
@@ -56,9 +57,13 @@ export class FaceDetectorComponent implements OnInit {
   }
 
   getSizeCam = (): void => {
-    const elementCam: HTMLElement = document.querySelector('.face-match');
+    let elementCam: HTMLElement;
+    // @ts-ignore
+    elementCam = document.querySelector('.face-match');
     const { width, height } = elementCam.getBoundingClientRect();
     this.videoDimensions = { width, height };
+    this.width = width;
+    this.height = height;
   }
 
   // Video player functions

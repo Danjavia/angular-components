@@ -1,4 +1,5 @@
 import {EventEmitter, Injectable } from '@angular/core';
+// @ts-ignore
 import * as faceapi from 'face-api.js';
 
 @Injectable({
@@ -11,10 +12,10 @@ export class FaceDetectorService {
 
 
   private modelsToLoad = [
-    faceapi.nets.ssdMobilenetv1.loadFromUri('assets/models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('assets/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('assets/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('assets/models'),
+    faceapi.nets.ssdMobilenetv1.loadFromUri('./assets/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('./assets/models'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('./assets/models'),
+    faceapi.nets.faceExpressionNet.loadFromUri('./assets/models'),
   ];
 
   constructor() {

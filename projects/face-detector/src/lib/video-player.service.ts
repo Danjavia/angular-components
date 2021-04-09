@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable } from '@angular/core';
-import {FaceApiService} from './face-api.service';
 import * as _ from 'lodash';
+import { FaceDetectorService } from './face-detector.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class VideoPlayerService {
   callbackAI: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private faceApiService: FaceApiService,
+    private faceApiService: FaceDetectorService,
   ) {
 
   }
