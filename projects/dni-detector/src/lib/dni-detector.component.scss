@@ -4,11 +4,21 @@
 }
 
 .video-player {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  .placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .document-hint {
     position: fixed;
@@ -36,6 +46,48 @@
       bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
+    }
+  }
+
+  &.landscape {
+
+    .placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: rotate(-90deg);
+    }
+
+    .document-hint {
+      position: absolute;
+      background: #131a27;
+      width: 75%;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    .video-player__landscape--button {
+      background: #131a27;
+      padding: 10px;
+      border-radius: 5px;
+      position: absolute;
+      left: 50%;
+      top: calc(749px - 160px);
+      transform: translateX(-50%);
+
+      &-normal {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 }

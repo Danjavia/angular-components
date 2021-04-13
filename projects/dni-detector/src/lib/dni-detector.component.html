@@ -1,5 +1,5 @@
-<div class="dni-match">
-  <div class="video-player" *ngIf="modelsReady && !photo">
+<div class="dni-match" [style.height]="height + 'px'" style="overflow: hidden;">
+  <div class="video-player" *ngIf="modelsReady && !photo" [ngClass]="format === 'horizontal' ? 'landscape' : null">
     <video
       *ngIf="stream"
       #dniVideoElement
@@ -10,11 +10,11 @@
       [style.height]="height + 'px'"
     ></video>
     <canvas #canvas id="new-over-canvas"></canvas>
-    <img [src]="'assets/images/funnel/' + side + '.png'" alt="placeholder" class="placeholder" />
+    <img [src]="placeholder" alt="placeholder" class="placeholder" />
     <div class="text-center text-white document-hint">
       Ubica la cédula sobre una superficie plana, para mejorar el resultado.
     </div>
-    <div class="video-player__landscape--button">
+    <div class="video-player__landscape--button" [style]="{top: 'calc(' + height + 'px - 110px)'}">
       <div class="text-center">
         <h3 class="text-green-100">{{count}}</h3>
         <!--      <h3 class="text-green-100">{{type}}</h3>-->

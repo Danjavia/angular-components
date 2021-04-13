@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router';
 import { DniDetectorService } from './dni-detector.service';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
@@ -18,6 +18,10 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   width: number;
   height: number;
   @Input() selector: string;
+  @Input() format: string; // (horizontal|vertical)
+  @Input() placeholder: string; // path to placeholder image
+  @Input() side: string;
+  @Output() takePhoto: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('dniVideoElement') dniVideoElement: ElementRef;
   @ViewChild('canvas', {static: false}) canvas: ElementRef<HTMLCanvasElement>;
   listEvents: Array<any> = [];
@@ -25,7 +29,6 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   overCanvas: any;
   count = 2;
   photo: string;
-  side: any;
   classifications: any = [];
   type: string;
 
@@ -37,7 +40,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     // @Inject(DOCUMENT) private document: Document,
   ) {
-    this.side = this.route.snapshot.queryParams.side || null;
+    this.side = this.route.snapshot.queryParams.side || this.side;
   }
 
   ngOnInit(): void {
@@ -154,21 +157,33 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
 
   async snapshot(): Promise<void> {
     // this.playListener();
-    // this.overCanvas.getContext('2d').drawImage(this.canvas.nativeElement.getContext('2d').canvas, 0, 0, this.width, this.height);
-    // this.photo = this.overCanvas.toDataURL();
+    const canvasCtx = this.canvas.nativeElement.getContext('2d');
+    const elementCam: HTMLElement = document.querySelector('.face-match');
+    const { width, height } = elementCam.getBoundingClientRect();
+
+    // get the scale
+    const scale = Math.min(canvasCtx.canvas.width / width, canvasCtx.canvas.height / height);
+    // get the top left position of the image
+    const x = (canvasCtx.canvas.width / 2) - (width / 2) * scale;
+    const y = (canvasCtx.canvas.height / 2) - (height / 2) * scale;
+    canvasCtx.drawImage(this.dniVideoElement.nativeElement, x, y, (width * scale) * 1.3, height * scale);
     // console.log(this.photo);
     if (this.side === 'placeholder') {
-      await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok');
+      // await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok');
     } else {
-      await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok&reverse=ok');
+      // await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok&reverse=ok');
     }
+
+    this.takePhoto.emit({
+      image: canvasCtx.canvas.toDataURL('image/jpg'),
+    });
   }
 
   onResults(result): void {
     if (result && this.count > 0) {
       this.type = result.class;
       console.log(result.class);
-      if (this.side === 'placeholder' && ['bench', 'tv', 'book', 'cell_phone'].includes(result.class)) {
+      if (this.side === 'placeholder' && ['bench', 'tv', 'book', 'cell phone'].includes(result.class)) {
         console.log('Detectet!!!');
         this.counterDown();
       } else if (this.side === 'placeholder-inverse' && ['bench', 'tv', 'book', 'cell phone'].includes(result.class)) {

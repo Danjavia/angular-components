@@ -1,5 +1,5 @@
 // import { DOCUMENT } from '@angular/common';
-import {Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { FaceDetectorService } from './face-detector.service';
 import { VideoPlayerService } from './video-player.service';
@@ -18,6 +18,8 @@ export class FaceDetectorComponent implements OnInit {
   stream: any;
   width: number;
   height: number;
+  @Input() placeholder: string;
+  @Output() takePhoto: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('videoElement') videoElement: ElementRef;
   @ViewChild('canvas', {static: false}) canvas: ElementRef<HTMLCanvasElement>;
   listEvents: Array<any> = [];
@@ -129,6 +131,9 @@ export class FaceDetectorComponent implements OnInit {
     this.overCanvas.getContext('2d').drawImage(this.canvas.nativeElement.getContext('2d').canvas, 0, 0, this.width, this.height);
     this.photo = this.overCanvas.toDataURL();
     console.log(this.photo);
-    await this.router.navigateByUrl('/funnel/biometric/last?selfie=ok');
+    this.takePhoto.emit({
+      image: this.photo,
+    });
+    // await this.router.navigateByUrl('/funnel/biometric/last?selfie=ok');
   }
 }

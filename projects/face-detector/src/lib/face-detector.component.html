@@ -1,4 +1,4 @@
-<div class="face-match">
+<div class="face-match" [style.height]="height + 'px'" style="overflow: hidden;">
   <div class="video-player" *ngIf="modelsReady && !photo">
     <video
       *ngIf="stream"
@@ -10,11 +10,11 @@
       [style.height]="height + 'px'"
     ></video>
     <canvas #canvas id="new-over-canvas"></canvas>
-    <img src="assets/images/funnel/selfie.png" alt="placeholder" class="placeholder" />
+    <img [src]="placeholder" alt="placeholder" class="placeholder" />
     <div class="text-center text-white face-hint">
       Ubica tu rostro dentro del círculo. Tomaremos la foto de manera automática
     </div>
-    <div class="counter">
+    <div class="counter" [style]="{bottom: 'calc(' + height + 'px - 130px)'}">
       <div class="text-center">
         <h3>{{count}}</h3>
         <strong class="text-white">Permanece quieto mientras tomamos la foto</strong>
