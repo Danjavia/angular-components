@@ -1,4 +1,8 @@
 <div class="face-match" [style.height]="height + 'px'" style="overflow: hidden;">
+  <div *ngIf="!modelsReady || !stream" style="justify-content: center; display: flex; align-items: center;">
+    <img src="https://svgshare.com/i/WC7.svg" alt="loader">
+  </div>
+
   <div class="video-player" *ngIf="modelsReady && !photo">
     <video
       *ngIf="stream"

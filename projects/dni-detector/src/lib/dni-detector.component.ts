@@ -27,7 +27,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   listEvents: Array<any> = [];
   modelsReady: boolean;
   overCanvas: any;
-  count = 2;
+  count = 20;
   photo: string;
   classifications: any = [];
   type: string;
@@ -111,7 +111,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
         requestAnimationFrame(() => {
           this.detectFrame(video, model);
         });
-      }, 1000);
+      }, 100);
     });
   }
 
@@ -246,7 +246,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   }
 
   private resetCounter(): void {
-    this.count = 2;
+    this.count = 20;
   }
 
 }

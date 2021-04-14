@@ -6,6 +6,10 @@ import {ActivatedRoute, Router} from '@angular/router';
   selector: 'lib-fingerprint-detector',
   template: `
     <div class="face-match">
+      <div *ngIf="!modelsReady || !currentStream" style="justify-content: center; display: flex; align-items: center;">
+        <img src="https://svgshare.com/i/WAS.svg" alt="loader">
+      </div>
+
       <div class="video-player" *ngIf="modelsReady && !photo" [ngClass]="screenshotTaked ? 'shutter-click' : null">
         <video
           #fingerprintVideoElement
