@@ -16,13 +16,10 @@
     <canvas #canvas id="new-over-canvas"></canvas>
     <img [src]="placeholder" alt="placeholder" class="placeholder" />
     <div class="text-center text-white face-hint">
-      Ubica tu rostro dentro del círculo. Tomaremos la foto de manera automática
+      Ubica tu rostro dentro del círculo y sigue las instrucciones
     </div>
-    <div class="counter" [style]="{bottom: 'calc(' + height + 'px - 130px)'}">
-      <div class="text-center">
-        <h3>{{count}}</h3>
-        <strong class="text-white">Permanece quieto mientras tomamos la foto</strong>
-      </div>
+    <div class="counter">
+      {{!smileValidation ? 'Sonrie a la cámara para activar la captura' : '¡Gracias! Estamos procesando la imagen'}}
     </div>
   </div>
 </div>

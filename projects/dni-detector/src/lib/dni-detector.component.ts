@@ -27,7 +27,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   listEvents: Array<any> = [];
   modelsReady: boolean;
   overCanvas: any;
-  count = 20;
+  count = 2;
   photo: string;
   classifications: any = [];
   type: string;
@@ -111,7 +111,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
         requestAnimationFrame(() => {
           this.detectFrame(video, model);
         });
-      }, 100);
+      }, 10);
     });
   }
 
@@ -158,7 +158,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   async snapshot(): Promise<void> {
     // this.playListener();
     const canvasCtx = this.canvas.nativeElement.getContext('2d');
-    const elementCam: HTMLElement = document.querySelector('.face-match');
+    const elementCam: HTMLElement = document.querySelector(this.selector);
     const { width, height } = elementCam.getBoundingClientRect();
 
     // get the scale
@@ -246,7 +246,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   }
 
   private resetCounter(): void {
-    this.count = 20;
+    this.count = 2;
   }
 
 }
