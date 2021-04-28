@@ -155,19 +155,17 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
     console.count('renders');
   }
 
-  async snapshot(): Promise<void> {
-    // this.playListener();
+  async snapshot(result: any): Promise<void> {
+    const { bbox } = result;
+    console.log(bbox);
     const canvasCtx = this.canvas.nativeElement.getContext('2d');
-    const elementCam: HTMLElement = document.querySelector(this.selector);
+    const elementCam: HTMLElement = document.querySelector('.video-player');
     const { width, height } = elementCam.getBoundingClientRect();
-
-    // get the scale
-    const scale = Math.min(canvasCtx.canvas.width / width, canvasCtx.canvas.height / height);
-    // get the top left position of the image
-    const x = (canvasCtx.canvas.width / 2) - (width / 2) * scale;
-    const y = (canvasCtx.canvas.height / 2) - (height / 2) * scale;
-    canvasCtx.drawImage(this.dniVideoElement.nativeElement, x, y, (width * scale) * 1.3, height * scale);
-    // console.log(this.photo);
+    canvasCtx.canvas.width = width;
+    canvasCtx.canvas.height = height;
+    canvasCtx.clearRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
+    console.log(width, height);
+    canvasCtx.drawImage(this.dniVideoElement.nativeElement, bbox[0], bbox[1], bbox[2], bbox[3], 0, 0, width, height);
     if (this.side === 'placeholder') {
       // await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok');
     } else {
@@ -182,13 +180,13 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
   onResults(result): void {
     if (result && this.count > 0) {
       this.type = result.class;
-      console.log(result.class);
+      console.log(result);
       if (this.side === 'placeholder' && ['bench', 'tv', 'book', 'cell phone'].includes(result.class)) {
         console.log('Detectet!!!');
-        this.counterDown();
+        this.counterDown(result);
       } else if (this.side === 'placeholder-inverse' && ['bench', 'tv', 'book', 'cell phone'].includes(result.class)) {
         console.log('Detectet!!!');
-        this.counterDown();
+        this.counterDown(result);
       } else {
         this.resetCounter();
       }
@@ -237,11 +235,11 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
     // }
   }
 
-  private counterDown(): void {
+  private counterDown(result: any): void {
     this.count--;
 
     if (this.count === 0) {
-      this.snapshot();
+      this.snapshot(result);
     }
   }
 

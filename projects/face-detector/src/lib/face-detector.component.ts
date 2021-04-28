@@ -45,7 +45,6 @@ export class FaceDetectorComponent implements OnInit {
   ngOnInit(): void {
     this.checkMediaSources();
     this.getSizeCam();
-
     this.listenerEvents();
   }
 
@@ -113,7 +112,7 @@ export class FaceDetectorComponent implements OnInit {
   drawFace = (resizedDetections, displaySize) => {
     const {globalFace} = this.faceApiService;
     this.overCanvas.getContext('2d').clearRect(0, 0, displaySize.width, displaySize.height);
-    globalFace.draw.drawDetections(this.overCanvas, resizedDetections);
+    // globalFace.draw.drawDetections(this.overCanvas, resizedDetections);
   }
 
   checkFace = () => {
@@ -129,10 +128,12 @@ export class FaceDetectorComponent implements OnInit {
   playListener(): void {
     const {globalFace} = this.faceApiService;
     this.overCanvas = globalFace.createCanvasFromMedia(this.videoElement.nativeElement);
-    this.renderer2.setProperty(this.overCanvas, 'id', 'new-canvas-over');
-    this.renderer2.setStyle(this.overCanvas, 'width', `${this.width}px`);
-    this.renderer2.setStyle(this.overCanvas, 'height', `${this.height}px`);
-    this.renderer2.appendChild(this.elementRef.nativeElement, this.overCanvas);
+    this.canvas.nativeElement = globalFace.createCanvasFromMedia(this.videoElement.nativeElement);
+    this.renderer2.setProperty(this.overCanvas, 'id', 'new-over-canvas');
+    this.renderer2.setProperty(this.canvas.nativeElement, 'width', this.width);
+    this.renderer2.setProperty(this.canvas.nativeElement, 'height', this.height);
+    this.renderer2.setStyle(this.canvas.nativeElement, 'width', `${this.width}px`);
+    this.renderer2.setStyle(this.canvas.nativeElement, 'height', `${this.height}px`);
   }
 
   async snapshot(): Promise<void> {
