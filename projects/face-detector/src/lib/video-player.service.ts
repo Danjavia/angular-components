@@ -21,11 +21,11 @@ export class VideoPlayerService {
       const {videoWidth, videoHeight } = videoElement.nativeElement;
       const displaySize = {width: videoWidth, height: videoHeight};
 
-      const faceDetections = await globalFace.detectAllFaces(videoElement.nativeElement)
-        .withFaceLandmarks();
-      // .withFaceExpressions();
+      const faceDetections = await globalFace.detectSingleFace(videoElement.nativeElement)
+        .withFaceLandmarks()
+        .withFaceExpressions();
 
-      const landMarks = faceDetections[0].landmarks || null;
+      const landMarks = faceDetections.landmarks || null;
       const eyeLeft = landMarks.getLeftEye();
       const eyeRight = landMarks.getRightEye();
       const eyes = {
@@ -35,6 +35,7 @@ export class VideoPlayerService {
       const resizedDetections = globalFace.resizeResults(faceDetections, displaySize);
 
       this.callbackAI.emit({
+        landMarks,
         resizedDetections,
         displaySize,
         eyes,

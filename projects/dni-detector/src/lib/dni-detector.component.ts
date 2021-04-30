@@ -159,7 +159,7 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
     const { bbox } = result;
     console.log(bbox);
     const canvasCtx = this.canvas.nativeElement.getContext('2d');
-    const elementCam: HTMLElement = document.querySelector('.video-player');
+    const elementCam: HTMLElement = document.querySelector(this.selector);
     const { width, height } = elementCam.getBoundingClientRect();
     canvasCtx.canvas.width = width;
     canvasCtx.canvas.height = height;
