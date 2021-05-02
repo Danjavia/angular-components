@@ -157,23 +157,16 @@ export class DniDetectorComponent implements OnInit, OnDestroy {
 
   async snapshot(result: any): Promise<void> {
     const { bbox } = result;
-    console.log(bbox);
     const canvasCtx = this.canvas.nativeElement.getContext('2d');
     const elementCam: HTMLElement = document.querySelector(this.selector);
     const { width, height } = elementCam.getBoundingClientRect();
     canvasCtx.canvas.width = width;
     canvasCtx.canvas.height = height;
     canvasCtx.clearRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
-    console.log(width, height);
     canvasCtx.drawImage(this.dniVideoElement.nativeElement, bbox[0], bbox[1], bbox[2], bbox[3], 0, 0, width, height);
-    if (this.side === 'placeholder') {
-      // await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok');
-    } else {
-      // await this.router.navigateByUrl('/funnel/biometric/first?anverse=ok&reverse=ok');
-    }
 
     this.takePhoto.emit({
-      image: canvasCtx.canvas.toDataURL('image/jpg'),
+      image: canvasCtx.canvas.toDataURL('image/jpeg', 0.7),
     });
   }
 

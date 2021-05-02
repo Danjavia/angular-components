@@ -89,11 +89,11 @@ export class FaceDetectorComponent implements OnInit {
             this.drawFace(resizedDetections, displaySize);
             // this.count--;
 
-            if (resizedDetections.expressions.neutral < 0.6) {
+            if (resizedDetections.expressions.happy > 0.6) {
               this.smileValidation = true;
             }
 
-            if (resizedDetections.expressions.neutral > 0.95 && this.smileValidation) {
+            if (resizedDetections.expressions.neutral > 0.85 && this.smileValidation) {
               this.count --;
             }
 
@@ -139,8 +139,7 @@ export class FaceDetectorComponent implements OnInit {
   async snapshot(): Promise<void> {
     this.playListener();
     this.overCanvas.getContext('2d').drawImage(this.canvas.nativeElement.getContext('2d').canvas, 0, 0, this.width, this.height);
-    this.photo = this.overCanvas.toDataURL();
-    console.log(this.photo);
+    this.photo = this.overCanvas.toDataURL('image/jpeg', 0.7);
     this.takePhoto.emit({
       image: this.photo,
     });
